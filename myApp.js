@@ -11,16 +11,19 @@ const createAndSavePerson = (done) => {
     age: 23,
     favoriteFoods: ["Roasted Chicken", "Milanesa", "Pizza"]
   }
-  let person = new Person(personObj)
+  let person = new Person(personObj);
 
   person.save((error, data) => {
     if (error) return done(error);
     done(null , data);
-  })
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, (error, data) => {
+    if (error) return done(error);
+    done(null , data);
+  })
 };
 
 const findPeopleByName = (personName, done) => {
