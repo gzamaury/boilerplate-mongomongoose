@@ -103,8 +103,20 @@ const removeManyPeople = (done) => {
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
+  
+  let searchByFood = {favoriteFoods: foodToSearch}
+  let orderByName = {name: "asc"}
+  let limitResult = 2
+  let selectedFields = "-age"
+  
+  Person.find(searchByFood)
+    .sort(orderByName)
+    .limit(limitResult)
+    .select(selectedFields)
+    .exec((error, data) => {
+      if (error) return done(error);
+      done(null , data);
+    });
 };
 
 /** **Well Done !!**
